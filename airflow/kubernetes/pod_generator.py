@@ -564,7 +564,7 @@ class PodGenerator(object):
         return reduce(PodGenerator.reconcile_pods, pod_list)
 
     @staticmethod
-    def serialize_pod(pod: k8s.V1Pod):
+    def serialize_pod(pod):
         """
 
         Converts a k8s.V1Pod into a jsonified object
