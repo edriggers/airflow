@@ -564,6 +564,18 @@ class PodGenerator(object):
         return reduce(PodGenerator.reconcile_pods, pod_list)
 
     @staticmethod
+    def serialize_pod(pod: k8s.V1Pod):
+        """
+
+        Converts a k8s.V1Pod into a jsonified object
+
+        @param pod:
+        @return:
+        """
+        api_client = ApiClient()
+        return api_client.sanitize_for_serialization(pod)
+
+    @staticmethod
     def deserialize_model_file(path):
         """
         :param path: Path to the file
@@ -580,8 +592,17 @@ class PodGenerator(object):
         else:
             pod = yaml.safe_load(path)
 
-        # pylint: disable=protected-access
-        return api_client._ApiClient__deserialize_model(pod, k8s.V1Pod)
+        return PodGenerator.deserialize_model_dict(pod)
+
+    @staticmethod
+    def deserialize_model_dict(pod_dict: dict) -> k8s.V1Pod:
+        """
+        Deserializes python dictionary to k8s.V1Pod
+        @param pod_dict:
+        @return:
+        """
+        api_client = ApiClient()
+        return api_client._ApiClient__deserialize_model(pod_dict, k8s.V1Pod)  # pylint: disable=W0212
 
 
 def merge_objects(base_obj, client_obj):
