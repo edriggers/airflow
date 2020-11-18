@@ -50,7 +50,8 @@ with DAG(
             try:
                 return_code = os.system("cat /shared/test.txt")
                 if return_code != 0:
-                    raise ValueError(f"Error when checking volume mount. Return code {return_code}")
+                    raise ValueError("Error when checking volume mount. Return code {return_code}"
+                                     .format(return_code=return_code))
             except ValueError as e:
                 if i > 4:
                     raise e

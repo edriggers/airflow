@@ -34,7 +34,6 @@ try:
         AirflowKubernetesScheduler,
         KubeConfig,
         KubernetesExecutor,
-        create_pod_id,
         get_base_pod_from_template,
     )
     from airflow.kubernetes import pod_generator

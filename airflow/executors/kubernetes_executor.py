@@ -31,9 +31,9 @@ from queue import Empty
 import kubernetes
 from dateutil import parser
 from kubernetes import client, watch
-from kubernetes.client import Configuration, models as k8s
+from kubernetes.client import models as k8s
 from kubernetes.client.rest import ApiException
-from urllib3.exceptions import HTTPError, ReadTimeoutError
+from urllib3.exceptions import ReadTimeoutError
 
 from airflow import settings
 from airflow.configuration import conf
@@ -438,7 +438,7 @@ class AirflowKubernetesScheduler(LoggingMixin):
 
         if not base_worker_pod:
             raise AirflowException(
-                f"could not find a valid worker template yaml at {self.kube_config.pod_template_file}"
+                "could not find a valid worker template yaml at {}".format(self.kube_config.pod_template_file)
             )
 
         pod = PodGenerator.construct_pod(
@@ -670,7 +670,7 @@ class AirflowKubernetesScheduler(LoggingMixin):
         self._manager.shutdown()
 
 
-def get_base_pod_from_template(pod_template_file: Optional[str], kube_config: Any) -> k8s.V1Pod:
+def get_base_pod_from_template(pod_template_file, kube_config):
     """
     Reads either the pod_template_file set in the executor_config or the base pod_template_file
     set in the airflow.cfg to craft a "base pod" that will be used by the KubernetesExecutor
