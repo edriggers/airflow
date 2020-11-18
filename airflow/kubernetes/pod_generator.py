@@ -585,7 +585,6 @@ class PodGenerator(object):
         ``_ApiClient__deserialize_model`` from the kubernetes client.
         This issue is tracked here; https://github.com/kubernetes-client/python/issues/977.
         """
-        api_client = ApiClient()
         if os.path.exists(path):
             with open(path) as stream:
                 pod = yaml.safe_load(stream)
