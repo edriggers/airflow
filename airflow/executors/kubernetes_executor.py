@@ -31,7 +31,6 @@ from queue import Empty
 import kubernetes
 from dateutil import parser
 from kubernetes import client, watch
-from kubernetes.client import models as k8s
 from kubernetes.client.rest import ApiException
 from urllib3.exceptions import ReadTimeoutError
 
