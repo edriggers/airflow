@@ -77,6 +77,8 @@ with DAG(
         }
     )
 
+    # [START task_with_volume]
+
     # You can mount volume or secret to the worker pod
     second_task = PythonOperator(
         task_id="four_task",
@@ -142,6 +144,8 @@ with DAG(
             ),
         },
     )
+    # [END task_with_sidecar]
+
 
     # Test that we can add labels to pods
     third_task = PythonOperator(
