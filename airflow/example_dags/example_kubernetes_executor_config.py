@@ -146,7 +146,6 @@ with DAG(
     )
     # [END task_with_sidecar]
 
-
     # Test that we can add labels to pods
     third_task = PythonOperator(
         task_id="non_root_task",
